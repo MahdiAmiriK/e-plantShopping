@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
 import { useSelector, useDispatch } from "react-redux";
-import { addItem, removeItem, updateQuantity } from "./CartSlice"
+import { addItem } from "./CartSlice"
 
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-    const [addedToCart, setAddedToCart] = useState({key: value});
+    const [addedToCart, setAddedToCart] = useState({});
+    const dispatch = useDispatch();
     
     const plantsArray = [
         {
@@ -286,9 +287,9 @@ function ProductList({ onHomeClick }) {
                 <div className="product-grid">
                     
                     {plantsArray.map((cat, catIndex) => (
-                        <>
+                        <div key={catIndex}>
                             <h2 className='product-list'>{cat.category}</h2>
-                            <ul key={catIndex} className='product-list'>
+                            <ul className='product-list'>
                                 {cat.plants.map((item, index) => (
                                     <li className='product-card' key={index}>
                                     <h3 className='product-title'>{ item.name }</h3>
@@ -299,7 +300,7 @@ function ProductList({ onHomeClick }) {
                                     </li>
                                 ))}
                             </ul>
-                        </>
+                        </div>
                     )) } 
 
                 </div>
