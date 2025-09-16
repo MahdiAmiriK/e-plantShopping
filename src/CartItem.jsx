@@ -17,16 +17,24 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleContinueShopping = (e) => {
-   
+    e.preventDefault(); 
+    onContinueShopping();
   };
 
-
+  const handleCheckoutShopping = (e) => {
+    alert('Functionality to be added for future reference');
+  };
 
   const handleIncrement = (item) => {
+    dispatch(updateQuantity({...item, quantity: item.quantity + 1}));
   };
 
   const handleDecrement = (item) => {
-   
+    if(item.quantity > 1){
+        dispatch(updateQuantity({...item, quantity: item.quantity - 1}));
+    }else{
+        dispatch(removeItem(item));
+    }
   };
 
   const handleRemove = (item) => {
